@@ -50,3 +50,62 @@
 
      https://stackoverflow.com/questions/46584000/cmake-error-variables-are-set-to-notfound
       
+## 3. eigen 3.1.0
+* __Download 3.1.0 version__
+
+     https://bitbucket.org/eigen/eigen/downloads/?tab=tags
+     
+## 4. ORB-SLAM install
+
+      git clone https://github.com/raulmur/ORB_SLAM2.git ORB_SLAM2
+      cd ORB_SLAM2
+      chmod +x build.sh
+      ./build.sh
+    
+* __[usleep(3000);] error ./build.sh__
+
+    Find file and add the following codes.
+    
+    (LocalMapping.cc / LoopClosing.cc / Tracking.cc / System.cc / Viewer.cc
+    System.cc / mono_euroc.cc / mono_kitti.cc / mono_tum.cc / rgbd_tum.cc
+    stereo_kitti.cc / stereo_euroc.cc)
+	
+	  #include <unistd.h>
+	  #include <stdio.h>
+	  #include <stdlib.h>
+      
+ ## 5. ORB_SLAM ROS
+ 
+__Move ORB_SLAM file to catkin_ws/src/ and Remove build file__
+
+	./build.sh
+	./build_ros.sh
+	
+* __if error ./build_ros.sh__
+
+	https://github.com/raulmur/ORB_SLAM2/issues/535
+ 
+ 
+## 6. Realsense setting
+
+   * https://github.com/IntelRealSense/realsense-ros#installation-instructions
+   
+* __Register the server's public key:__
+
+      sudo apt-key adv --keyserver keys.gnupg.net --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+    
+* __Add the server to the list of repositories  (Ubuntu 16 LTS):__
+    
+      sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo xenial main" -u
+    
+* __Install the libraries__
+
+      sudo apt-get install librealsense2-dkms
+      sudo apt-get install librealsense2-utils
+      sudo apt-get install librealsense2-dev
+      sudo apt-get install librealsense2-dbg
+ 
+* __check install__
+   
+      realsense-viewer
+      
