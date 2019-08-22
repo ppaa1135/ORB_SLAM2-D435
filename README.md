@@ -139,3 +139,24 @@ __Move ORB_SLAM file to catkin_ws/src/ and Remove build file__
       echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
       source ~/.bashrc
       
+      
+## 7. Realsense D435 ROS
+
+### launch file 
+* http://www.programmersought.com/article/485956353/
+ 
+* __Add two lines at  [rs_rgbd.launch]:110 lines__
+    
+      <remap from="/camera/aligned_depth_to_color/image_raw" to="/camera/depth_registered/image_view>
+      <remap from="/camera/color/image_raw" to="/camera/rgb/image_raw>
+ 
+ 
+### rs_rgbd.launch fails
+
+* https://github.com/IntelRealSense/realsense-ros/issues/308
+
+## 8. ORB_SLAM & D435
+
+	roslaunch realsense2_camera rs_rgbd.launch 
+
+	rosrun ORB_SLAM2 RGBD ~/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt ~/catkin_ws/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/Asus.yaml 
