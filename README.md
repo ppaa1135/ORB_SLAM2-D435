@@ -88,6 +88,8 @@ __Move ORB_SLAM file to catkin_ws/src/ and Remove build file__
  
 ## 6. Realsense setting
 
+### Install the latest Intel® RealSense™ SDK 2.0
+
    * https://github.com/IntelRealSense/realsense-ros#installation-instructions
    
 * __Register the server's public key:__
@@ -108,4 +110,32 @@ __Move ORB_SLAM file to catkin_ws/src/ and Remove build file__
 * __check install__
    
       realsense-viewer
+      
+### Install Intel® RealSense™ ROS from Sources
+
+* __create_workspace__
+       
+      mkdir -p ~/catkin_ws/src
+      cd ~/catkin_ws/src/
+      
+* __Clone the latest Intel® RealSense™ ROS from here into 'catkin_ws/src/'__
+
+      git clone https://github.com/IntelRealSense/realsense-ros.git
+      cd realsense-ros/
+      git checkout `git tag | sort -V | grep -P "^\d+\.\d+\.\d+" | tail -1`
+      cd ..
+ 
+* __install ddynamic_reconfigure__
+ 
+      git clone https://github.com/pal-robotics/ddynamic_reconfigure.git
+      
+* __catkin_make__
+ 
+      catkin_init_workspace
+      cd ..
+      catkin_make clean
+      catkin_make -DCATKIN_ENABLE_TESTING=False -DCMAKE_BUILD_TYPE=Release
+      catkin_make install
+      echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+      source ~/.bashrc
       
